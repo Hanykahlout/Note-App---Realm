@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CategoriesNoteViewController: UIViewController {
+class categoriesNoteViewController: UIViewController {
     
     @IBOutlet weak var categoriesNoteTableView: UITableView!
     var notes:[Note] = [Note]()
@@ -51,7 +51,7 @@ class CategoriesNoteViewController: UIViewController {
     }
     
 }
-extension CategoriesNoteViewController : UITableViewDataSource , UITableViewDelegate{
+extension categoriesNoteViewController : UITableViewDataSource , UITableViewDelegate{
     
     func setDelegate() {
         categoriesNoteTableView.delegate = self
