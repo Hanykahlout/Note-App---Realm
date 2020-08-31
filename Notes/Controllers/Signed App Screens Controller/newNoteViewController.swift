@@ -8,7 +8,7 @@
 
 import UIKit
 import SCLAlertView
-class NewNoteViewController: UIViewController {
+class newNoteViewController: UIViewController {
     
     @IBOutlet weak var titleTextField: BottomBorderTextField!
     @IBOutlet weak var descriptionTextField: BottomBorderTextField!
@@ -50,7 +50,7 @@ class NewNoteViewController: UIViewController {
         navigationController?.navigationBar.layoutIfNeeded()
     }
 }
-extension NewNoteViewController{
+extension newNoteViewController{
     func performSave(){
         if cheackData(){
             isSave ? save() : update()

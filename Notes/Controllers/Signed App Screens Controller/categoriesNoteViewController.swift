@@ -32,7 +32,7 @@ class categoriesNoteViewController: UIViewController {
     }
     
     @IBAction func addCategoriesNoteAction(_ sender: Any) {
-        let vc = storyboard?.instantiateViewController(identifier: "NewNoteViewController") as! NewNoteViewController
+        let vc = storyboard?.instantiateViewController(identifier: "NewNoteViewController") as! newNoteViewController
         vc.category = self.category
         vc.isSave = true
         navigationController?.pushViewController(vc, animated: true)
@@ -77,7 +77,7 @@ extension categoriesNoteViewController : UITableViewDataSource , UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = storyboard?.instantiateViewController(identifier: "NewNoteViewController") as! NewNoteViewController
+        let vc = storyboard?.instantiateViewController(identifier: "NewNoteViewController") as! newNoteViewController
         vc.isSave = false
         vc.note = notes[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
