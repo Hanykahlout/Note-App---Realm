@@ -12,7 +12,7 @@ class CategoriesNoteViewController: UIViewController {
     
     @IBOutlet weak var categoriesNoteTableView: UITableView!
     var notes:[Note] = [Note]()
-    var category:Categories!
+    var category:Category!
     var noteController:NoteController!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,17 +30,20 @@ class CategoriesNoteViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         setData()
     }
+    
     @IBAction func addCategoriesNoteAction(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(identifier: "NewNoteViewController") as! NewNoteViewController
         vc.category = self.category
         vc.isSave = true
         navigationController?.pushViewController(vc, animated: true)
     }
+    
     func setData() {
         notes.removeAll()
-        notes = category.notes?.allObjects as! [Note]
+        notes.append(contentsOf: category.notes)
         categoriesNoteTableView.reloadData()
     }
+    
     func clearBackgroundNavBar() {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
@@ -66,13 +69,13 @@ extension CategoriesNoteViewController : UITableViewDataSource , UITableViewDele
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete{
-            let isDeleted = noteController.delete(noteId: notes[indexPath.row].id!)
-            if isDeleted{
-                notes.remove(at: indexPath.row)
-                categoriesNoteTableView.deleteRows(at: [indexPath], with: .automatic)
-            }
+            
+            noteController.delete(note: notes[indexPath.row])
+            notes.remove(at: indexPath.row)
+            categoriesNoteTableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = storyboard?.instantiateViewController(identifier: "NewNoteViewController") as! NewNoteViewController
         vc.isSave = false
