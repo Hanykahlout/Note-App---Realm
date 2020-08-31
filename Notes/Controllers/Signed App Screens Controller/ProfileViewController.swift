@@ -26,7 +26,7 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var emailTextField: BottomBorderTextField!
     var userManager:UserManager!
-    var user:Users!
+    var user:User!
     var userController:UserController!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,27 +46,25 @@ class ProfileViewController: UIViewController {
         
     }
     func setUserInfo() {
-        nameLabel.text = user.firstName! + " " + user.lastName!
-        emailLabel.text = user.email!
-        characterLabel.text = String(user.firstName!.prefix(1))
-        let categories = user.categories?.allObjects as! [Categories]
-        categoriesNumber.text = String(categories.count)
+        nameLabel.text = user.firstName + " " + user.lastName
+        emailLabel.text = user.email
+        characterLabel.text = String(user.firstName.prefix(1))
+        let categories = user.categries.count
+        categoriesNumber.text = String(categories)
         setDoneAndWaitingNumber()
         fillTextFields()
     }
     func fillTextFields() {
-        firstNameTextField.text = user.firstName!
-        lastNameTextField.text = user.lastName!
-        phoneNumberTextField.text = user.phoneNumber!
-        emailTextField.text = user.email!
+        firstNameTextField.text = user.firstName
+        lastNameTextField.text = user.lastName
+        phoneNumberTextField.text = user.phoneNumber
+        emailTextField.text = user.email
     }
     func setDoneAndWaitingNumber() {
-        let categories = user.categories?.allObjects as! [Categories]
         var doneNotesNumber = 0
         var waitingNotesNumber = 0
-        for everyCategory in categories{
-            let notes = everyCategory.notes?.allObjects as! [Note]
-            for everyNote in notes {
+        for everyCategory in user.categries{
+            for everyNote in everyCategory.notes {
                 if everyNote.stauts{
                     doneNotesNumber += 1
                 }else{
@@ -102,8 +100,8 @@ extension ProfileViewController {
     }
     func cheackData() -> Bool {
         if !firstNameTextField.text!.isEmpty &&
-         !lastNameTextField.text!.isEmpty &&
-         !phoneNumberTextField.text!.isEmpty &&
+            !lastNameTextField.text!.isEmpty &&
+            !phoneNumberTextField.text!.isEmpty &&
             !emailTextField.text!.isEmpty{
             return true
         }
@@ -111,17 +109,15 @@ extension ProfileViewController {
     }
     
     func update() {
-        let firstName =  firstNameTextField.text!
-        let lastName = lastNameTextField.text!
-        let email = emailTextField.text!
-        let phoneNumber = phoneNumberTextField.text!
-        let isUpdated = userController.update(userId: user.id!, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber)
-        if isUpdated{
-            SCLAlertView().showInfo("Succefully Updated", subTitle: "The User Has Been Updated 😍😍😍")
-            clear()
-        }else{
-            SCLAlertView().showError("Error", subTitle: "The User Has Not Been Updated ☹️☹️☹️")
-        }
+        let updatedUser = User()
+        updatedUser.id = user.id
+        updatedUser.firstName =  firstNameTextField.text!
+        updatedUser.lastName = lastNameTextField.text!
+        updatedUser.email = emailTextField.text!
+        updatedUser.phoneNumber = phoneNumberTextField.text!
+        userController.update(updatedUser: updatedUser)
+        SCLAlertView().showInfo("Succefully Updated", subTitle: "The User Has Been Updated 😍😍😍")
+        clear()
     }
     func clear() {
         firstNameTextField.text = ""
