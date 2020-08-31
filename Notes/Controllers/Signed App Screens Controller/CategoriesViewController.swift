@@ -1,4 +1,3 @@
-//
 //  CategoriesViewController.swift
 //  Notes
 //
@@ -9,11 +8,13 @@
 import UIKit
 import SCLAlertView
 class CategoriesViewController: UIViewController {
+    
     @IBOutlet weak var categoriesTableView: UITableView!
-    var user:Users!
+    var user:User!
     var categoriesController:CategoriesController!
     var userManager:UserManager!
-    var categories:[Categories] = [Categories]()
+    var categories:[Category] = [Category]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initalization()
@@ -33,12 +34,10 @@ class CategoriesViewController: UIViewController {
         userManager = UserManager()
         user = userManager.read()
         setDelegate()
-        
     }
     func setCategories() {
         categories.removeAll()
-        let allCategories = user.categories!.allObjects
-        categories = allCategories as! [Categories]
+        categories.append(contentsOf: user.categries)
         categoriesTableView.reloadData()
     }
     
@@ -85,20 +84,17 @@ extension CategoriesViewController : UITableViewDelegate , UITableViewDataSource
         vc.category = categories[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
+
 }
 
 extension CategoriesViewController : categoryCell{
     func delete(index:IndexPath) {
-        let isDeleted = categoriesController.delete(categoryId: categories[index.row].id!)
-        if isDeleted {
-            categories.remove(at: index.row)
-            categoriesTableView.deleteRows(at: [index], with: .automatic)
-            SCLAlertView().showInfo("Succefull Deleted", subTitle: "The Category has been deleted")
-        }else{
-            SCLAlertView().showError("Error", subTitle: "The Category has not been deleted")
-        }
+        categoriesController.delete(category: categories[index.row])
+        
+        categories.remove(at: index.row)
+        categoriesTableView.deleteRows(at: [index], with: .automatic)
+        SCLAlertView().showInfo("Succefull Deleted", subTitle: "The Category has been deleted")
+        
     }
     
     func update(index:IndexPath) {
