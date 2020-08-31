@@ -7,105 +7,58 @@
 //
 
 import Foundation
-import CoreData
-import UIKit
+import RealmSwift
 import SCLAlertView
 class NoteController{
     
-    var context:NSManagedObjectContext!
+    var realm = try! Realm()
     
-    init(){
-        initilization()
-    }
-    func initilization(){
-        
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        context = appDelegate.persistentContainer.viewContext
-    }
-    
-    func create(note:Note) -> Bool  {
-        
-        do{
-            context.insert(note)
-            try context.save()
-            return true
-        }catch let error as NSError{
-            print(error)
+    func save(note:Note,inCategory:Category) {
+        try! realm.write{
+            inCategory.notes.append(note)
         }
-        
-        return false
     }
     
-    func read() -> [Note]? {
-        do {
-            let fetchR:NSFetchRequest = Note.fetchRequest()
-            return try context.fetch(fetchR)
-        }catch let error as NSError{
-            print(error)
+    func create(note:Note)  {
+       try! realm.write{
+            realm.add(note)
         }
-        return nil
     }
     
-    
-    
-    func update(noteId:String,newTitle:String,newDescription:String) -> Bool {
-        do{
-            let fetchR:NSFetchRequest = Note.fetchRequest()
-            fetchR.fetchLimit = 1
-            fetchR.predicate = NSPredicate(format: "id = %@", noteId)
-            let note = try context.fetch(fetchR)
-            if !note.isEmpty{
-                if let _note = note.first{
-                    _note.setValue(newTitle, forKey: "title")
-                    _note.setValue(newDescription, forKey: "descriptions")
-                    try context.save()
-                    return true
-                }
-            }else{
-                SCLAlertView().showError("Error", subTitle: "Category Not Found !!")
-            }
-        }catch let error as NSError{
-            print(error)
-        }
-        return false
+    func read() -> Results<Note>{
+        let notes = realm.objects(Note.self)
+        return notes
     }
-    func update(noteId:String,stauts:Bool) -> Bool {
-        do{
-            let fetchR:NSFetchRequest = Note.fetchRequest()
-            fetchR.fetchLimit = 1
-            fetchR.predicate = NSPredicate(format: "id = %@", noteId)
-            let note = try context.fetch(fetchR)
-            if !note.isEmpty{
-                if let _note = note.first{
-                    _note.setValue(stauts, forKey: "stauts")
-                    try context.save()
-                    return true
-                }
-            }else{
-                SCLAlertView().showError("Error", subTitle: "Category Not Found !!")
-            }
-        }catch let error as NSError{
-            print(error)
+    
+    func update(updatedNote:Note) {
+        try! realm.write{
+            realm.add(updatedNote, update: .modified)
         }
-        return false
     }
-    func delete(noteId:String) -> Bool {
-        do{
-            let fetchR:NSFetchRequest = Note.fetchRequest()
-            fetchR.fetchLimit = 1
-            fetchR.predicate = NSPredicate(format: "id = %@", noteId)
-            let note = try context.fetch(fetchR)
-            if !note.isEmpty{
-                if let _note = note.first{
-                    context.delete(_note)
-                    try context.save()
-                    return true
-                }
-            }
-        }catch let error as NSError {
-            print(error)
+//    func update(noteId:String,stauts:Bool) -> Bool {
+//        do{
+//            let fetchR:NSFetchRequest = Note.fetchRequest()
+//            fetchR.fetchLimit = 1
+//            fetchR.predicate = NSPredicate(format: "id = %@", noteId)
+//            let note = try context.fetch(fetchR)
+//            if !note.isEmpty{
+//                if let _note = note.first{
+//                    _note.setValue(stauts, forKey: "stauts")
+//                    try context.save()
+//                    return true
+//                }
+//            }else{
+//                SCLAlertView().showError("Error", subTitle: "Category Not Found !!")
+//            }
+//        }catch let error as NSError{
+//            print(error)
+//        }
+//        return false
+//    }
+    func delete(note:Note)  {
+        try! realm.write{
+            realm.delete(note)
         }
-        return false
     }
     
 }

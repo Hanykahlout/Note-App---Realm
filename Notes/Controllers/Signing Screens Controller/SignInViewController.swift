@@ -11,12 +11,12 @@ import SCLAlertView
 
 class SignInViewController: UIViewController {
     
-    @IBOutlet weak var userNameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
     var userController:UserController!
     var userManager:UserManager!
-    var user:Users?
+    var user:User!
     override func viewDidLoad() {
         super.viewDidLoad()
         initalization()
@@ -48,6 +48,7 @@ extension SignInViewController {
         if cheackData(){
             if isExist(){
                 if matchPassword(){
+                    userManager.create(user: user)
                     clear()
                     goToCategoriesScreen()
                 }
@@ -56,7 +57,7 @@ extension SignInViewController {
     }
     
     func cheackData() -> Bool {
-        if !userNameTextField.text!.isEmpty && !passwordTextField.text!.isEmpty{
+        if !emailTextField.text!.isEmpty && !passwordTextField.text!.isEmpty{
             return true
         }
         SCLAlertView().showError("Error", subTitle: "Fill all the fields, There is empty fields")
@@ -64,35 +65,22 @@ extension SignInViewController {
     }
     
     func isExist() -> Bool {
-        let userNameArray = userNameTextField.text!.split(separator: " ")
-        if userNameArray.count == 2{
-            
-            if let firstName = userNameArray.first , let lastName = userNameArray.last{
-                
-                let allUser = userController.read()
-                if let _allUser = allUser{
-                    for x in _allUser{
-                        if x.firstName == String(firstName) && x.lastName == String(lastName){
-                            user = x
-                            userManager.create(user: x)
-                            return true
-                        }
-                    }
-                    SCLAlertView().showError("Error", subTitle: "Invaild User Name")
-                }
-                
+        let email = emailTextField.text!
+        let allUser = userController.read().toArray(ofType: User.self) as [User]
+        for myUser in allUser{
+            if myUser.email == email{
+                user = myUser
+                return true
             }
-        }else{
-            SCLAlertView().showWarning("Error", subTitle: "You should enter first name and last name")
         }
+        SCLAlertView().showError("Error", subTitle: "Invaild Email")
         
         return false
         
     }
     
-    
     func matchPassword() -> Bool {
-        if user!.password == passwordTextField.text!{
+        if user.password == passwordTextField.text!{
             return true
         }
         SCLAlertView().showWarning("Error", subTitle: "Invaild Password")
@@ -103,8 +91,9 @@ extension SignInViewController {
         present(vc, animated: true)
     }
     func clear(){
-        userNameTextField.text = ""
+        emailTextField.text = ""
         passwordTextField.text = ""
     }
     
 }
+

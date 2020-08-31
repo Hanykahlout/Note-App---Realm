@@ -28,8 +28,8 @@ class NoteTableViewCell: UITableViewCell {
     func setNote(note:Note) {
         noteController = NoteController()
         self.note = note
-        title.text = note.title!
-        dscription.text = note.descriptions!
+        title.text = note.title
+        dscription.text = note.descriptions
         doneButton.backgroundColor = note.stauts ? UIColor(named: "Done Color") : UIColor(named: "Waiting Color")
         
     }
@@ -37,19 +37,26 @@ class NoteTableViewCell: UITableViewCell {
         performDone()
     }
 }
-
 extension NoteTableViewCell{
     func performDone() {
         if note.stauts {
-            let isUpdated = noteController.update(noteId: note.id!, stauts: false)
-            if isUpdated{
-                doneButton.backgroundColor = UIColor(named: "Waiting Color")
-            }
+            let updatedNote = Note()
+            updatedNote.id = note.id
+            updatedNote.title = note.title
+            updatedNote.descriptions = note.descriptions
+            updatedNote.stauts = false
+            noteController.update(updatedNote: updatedNote)
+            doneButton.backgroundColor = UIColor(named: "Waiting Color")
+            
         }else{
-            let isUpdated = noteController.update(noteId: note.id!, stauts: true)
-            if isUpdated{
-                doneButton.backgroundColor = UIColor(named: "Done Color")
-            }
+             let updatedNote = Note()
+             updatedNote.id = note.id
+             updatedNote.title = note.title
+             updatedNote.descriptions = note.descriptions
+             updatedNote.stauts = true
+             noteController.update(updatedNote: updatedNote)
+             doneButton.backgroundColor = UIColor(named: "Done Color")
+            
         }
     }
     

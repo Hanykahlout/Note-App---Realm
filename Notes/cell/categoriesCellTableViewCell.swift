@@ -30,10 +30,10 @@ class categoriesCellTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setCategory(category:Categories) {
+    func setCategory(category:Category) {
         workLabel.text = category.name
         noteLabel.text = category.descriptions
-        characterLabel.text = String(category.name!.prefix(1))
+        characterLabel.text = String(category.name.prefix(1))
     }
     
     @IBAction func editAction(_ sender: Any) {

@@ -7,80 +7,35 @@
 //
 
 import Foundation
-import CoreData
-import UIKit
+import RealmSwift
 import SCLAlertView
 class CategoriesController {
     
-    var context:NSManagedObjectContext!
-    
-    init(){
-        setContext()
-    }
-    private func setContext() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return  }
-        context = appDelegate.persistentContainer.viewContext
-    }
-    
-    func create(category:Categories) -> Bool {
-        do{
-            context.insert(category)
-            try context.save()
-            return true
-        }catch let error as NSError{
-            print(error)
+    var realm = try! Realm()
+    func save(category:Category,inUser:User) {
+        try! realm.write{
+            inUser.categries.append(category)
         }
-        return false
     }
-    func read() -> [Categories]? {
-        do{
-            let fetchR:NSFetchRequest = Categories.fetchRequest()
-            return try context.fetch(fetchR)
-        }catch let error as NSError{
-            print(error)
+    func create(category:Category)  {
+        try! realm.write{
+            realm.add(category)
         }
-        return nil
     }
-    func update(categoryId:String,newName:String,newDescription:String) -> Bool {
-        do{
-            let fetchR:NSFetchRequest = Categories.fetchRequest()
-            fetchR.fetchLimit = 1
-            fetchR.predicate = NSPredicate(format: "id = %@", categoryId)
-            let category = try context.fetch(fetchR)
-            if !category.isEmpty{
-                if let _category = category.first{
-                    _category.setValue(newName, forKey: "name")
-                    _category.setValue(newDescription, forKey: "descriptions")
-                    try context.save()
-                    
-                    return true
-                }
-            }else{
-                SCLAlertView().showError("Error", subTitle: "Category Not Found !!")
-            }
-        }catch let error as NSError{
-            print(error)
-        }
-        return false
+    func read() -> Results<Category> {
+        let categories = realm.objects(Category.self)
+        return categories
     }
     
-    func delete(categoryId:String) -> Bool {
-        do{
-            let fetchR:NSFetchRequest = Categories.fetchRequest()
-            fetchR.fetchLimit = 1
-            fetchR.predicate = NSPredicate(format: "id = %@", categoryId)
-            let category = try context.fetch(fetchR)
-            if !category.isEmpty{
-                if let _category = category.first{
-                    context.delete(_category)
-                    try context.save()
-                    return true
-                }
-            }
-        }catch let error as NSError {
-            print(error)
+    func update(updatedCategory:Category)  {
+        try! realm.write{
+            realm.add(updatedCategory, update: .modified)
         }
-        return false
     }
     
+    func delete(category:Category) {
+        try! realm.write{
+            realm.delete(category)
+        }
+    }
 }

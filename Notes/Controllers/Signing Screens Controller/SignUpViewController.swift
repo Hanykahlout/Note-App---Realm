@@ -54,14 +54,13 @@ extension SignUpViewController{
     
     func performSignUp() {
         if cheackData(){
-            if !thereIsASameUserName(){
-                let isSaved = saveData()
-                if isSaved{
-                    goToCategoriesScreen()
-                    clear()
-                }
+            if !thereIsASameEmail(){
+                saveData()
+                goToCategoriesScreen()
+                clear()
+                
             }else{
-                SCLAlertView().showError("Error", subTitle: "There is a User with the same name, please change your name")
+                SCLAlertView().showError("Error", subTitle: "There is a User with the same email, please enter a vaild email")
             }
         }
     }
@@ -78,33 +77,26 @@ extension SignUpViewController{
         return false
     }
     
-    func thereIsASameUserName()->Bool{
-        let users = userController.read()
-        if let _users = users{
-            for user in _users {
-                if user.firstName == firstNameTextField.text! && user.lastName == lastNameTextField.text!{
-                    return true
-                }
+    func thereIsASameEmail()->Bool{
+        let users = userController.read().toArray(ofType: User.self) as [User]
+        for user in users {
+            if user.email == emailTextField.text!{
+                return true
             }
         }
         return false
     }
     
-    func saveData() -> Bool {
-        let user = Users(context: userController.context)
+    func saveData() {
+        let user = User()
         user.id = UUID().uuidString
         user.firstName = firstNameTextField.text!
         user.lastName = lastNameTextField.text!
         user.password = password.text!
         user.phoneNumber = phoneTextField.text!
         user.email = emailTextField.text!
-        let isCreated = userController.create(user: user)
-        if !isCreated{
-            SCLAlertView().showError("Error", subTitle: "No User has been created ")
-            return false
-        }
+        userController.create(user: user)
         userManager.create(user: user)
-        return true
     }
     
     func clear(){

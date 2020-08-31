@@ -9,17 +9,18 @@
 import Foundation
 
 class UserManager {
+    
     let userController:UserController!
     
     init() {
         userController = UserController()
     }
-    func create(user:Users)  {
-        UserDefaults.standard.set(user.id, forKey: "Users")
+    func create(user:User)  {
+        UserDefaults.standard.set(user.id, forKey: "User")
     }
     
-    func read() -> Users {
-        let userId = UserDefaults.standard.string(forKey: "Users")
+    func read() -> User {
+        let userId = UserDefaults.standard.string(forKey: "User")
         let user = userController.getUserById(userId: userId!)
         return user!
     }
