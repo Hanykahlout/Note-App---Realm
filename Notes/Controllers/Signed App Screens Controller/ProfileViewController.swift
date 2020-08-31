@@ -25,6 +25,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var phoneNumberTextField: BottomBorderTextField!
     
     @IBOutlet weak var emailTextField: BottomBorderTextField!
+    var categoriesController:CategoriesController!
     var userManager:UserManager!
     var user:User!
     var userController:UserController!
@@ -38,6 +39,7 @@ class ProfileViewController: UIViewController {
     }
     
     func initlization() {
+        categoriesController = CategoriesController()
         userManager = UserManager()
         user = userManager.read()
         userController = UserController()
@@ -46,13 +48,16 @@ class ProfileViewController: UIViewController {
         
     }
     func setUserInfo() {
-        nameLabel.text = user.firstName + " " + user.lastName
-        emailLabel.text = user.email
-        characterLabel.text = String(user.firstName.prefix(1))
+        fillUserInfo()
         let categories = user.categries.count
         categoriesNumber.text = String(categories)
         setDoneAndWaitingNumber()
         fillTextFields()
+    }
+    func fillUserInfo() {
+        nameLabel.text = user.firstName + " " + user.lastName
+        emailLabel.text = user.email
+        characterLabel.text = String(user.firstName.prefix(1))
     }
     func fillTextFields() {
         firstNameTextField.text = user.firstName
@@ -115,7 +120,12 @@ extension ProfileViewController {
         updatedUser.lastName = lastNameTextField.text!
         updatedUser.email = emailTextField.text!
         updatedUser.phoneNumber = phoneNumberTextField.text!
+        updatedUser.password = user.password
+        for category in user.categries {
+        categoriesController.save(category: category , inUser: updatedUser)
+        }
         userController.update(updatedUser: updatedUser)
+        fillUserInfo()
         SCLAlertView().showInfo("Succefully Updated", subTitle: "The User Has Been Updated 😍😍😍")
         clear()
     }

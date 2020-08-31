@@ -24,9 +24,10 @@ class SettingsViewController: UIViewController {
     func initalization() {
         userManager = UserManager()
         clearBackgroundNavBar()
+    }
+    override func viewWillAppear(_ animated: Bool) {
         setData()
     }
-    
     @IBAction func backAction(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
