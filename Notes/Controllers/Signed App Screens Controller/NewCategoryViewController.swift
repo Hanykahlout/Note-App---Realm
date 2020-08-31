@@ -13,17 +13,17 @@ class NewCategoryViewController: UIViewController {
     @IBOutlet weak var categoryNameTextField: BottomBorderTextField!
     @IBOutlet weak var descriptionTextField: BottomBorderTextField!
     @IBOutlet weak var screenTitleLabel: UILabel!
-    var categoriesManager:CategoriesController!
+    var categoriesController:CategoriesController!
     var isSave:Bool!
-    var user:Users!
-    var category:Categories!
+    var user:User!
+    var category:Category!
     override func viewDidLoad() {
         super.viewDidLoad()
         initlization()
         // Do any additional setup after loading the view.
     }
     func initlization() {
-        categoriesManager = CategoriesController()
+        categoriesController = CategoriesController()
         setTitleLabel()
     }
     
@@ -40,8 +40,8 @@ class NewCategoryViewController: UIViewController {
             screenTitleLabel.text = "New Category"
         }else{
             screenTitleLabel.text = "Update Category"
-            categoryNameTextField.text = category.name!
-            descriptionTextField.text = category.descriptions!
+            categoryNameTextField.text = category.name
+            descriptionTextField.text = category.descriptions
         }
     }
     
@@ -50,7 +50,7 @@ extension NewCategoryViewController{
     func performSave() {
         if cheackData(){
             isSave ? save() : update()
-             
+            
         }
     }
     
@@ -70,29 +70,25 @@ extension NewCategoryViewController{
     
     func save(){
         
-        let cate = Categories(context: categoriesManager.context)
+        let cate = Category()
         cate.id = UUID().uuidString 
         cate.name = categoryNameTextField.text!
         cate.descriptions = descriptionTextField.text!
-        cate.user = user
-        let isCreated = categoriesManager.create(category: cate)
-        if isCreated {
-            clear()
-            SCLAlertView().showInfo("Succefull Created", subTitle: "Category has been created 😀👍🏻")
-            clear()
-        }else{
-            SCLAlertView().showError("Error", subTitle: "Category has not been created 😥 👎🏻")
-        }
-        
+        categoriesController.save(category: cate, inUser: user)
+        categoriesController.create(category: cate)
+        clear()
+        SCLAlertView().showInfo("Succefull Created", subTitle: "Category has been created 😀👍🏻")
     }
     
     func update() {
-        let isUpdated = categoriesManager.update(categoryId: category.id!, newName: categoryNameTextField.text!, newDescription: descriptionTextField.text!)
-        if isUpdated{
-            SCLAlertView().showInfo("Succefully Updated", subTitle: "Your Categry has been updated")
-            clear()
-        }else{
-            SCLAlertView().showError("Error", subTitle: "Your Category has not been updated")
-        }
+        let updatedCategory = Category()
+        updatedCategory.id = category.id
+        updatedCategory.name = categoryNameTextField.text!
+        updatedCategory.descriptions = descriptionTextField.text!
+        categoriesController.update(updatedCategory: updatedCategory)
+        SCLAlertView().showInfo("Succefully Updated", subTitle: "Your Categry has been updated")
+        clear()
+        
     }
+    
 }
