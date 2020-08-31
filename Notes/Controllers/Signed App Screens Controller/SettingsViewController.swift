@@ -33,9 +33,9 @@ class SettingsViewController: UIViewController {
     
     func setData() {
         let user = userManager.read()
-        nameLabel.text = user.firstName! + " \(user.lastName!)"
-        emaiLabel.text = user.email!
-        characterLabel.text = String(user.firstName!.prefix(1))
+        nameLabel.text = user.firstName + " \(user.lastName)"
+        emaiLabel.text = user.email
+        characterLabel.text = String(user.firstName.prefix(1))
     }
     
     func clearBackgroundNavBar() {
