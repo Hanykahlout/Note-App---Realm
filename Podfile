@@ -7,5 +7,5 @@ target 'Notes' do
 
   # Pods for Notes
 pod 'SCLAlertView'
-
+pod 'RealmSwift'
 end
