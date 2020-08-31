@@ -51,6 +51,9 @@
 		91CE56B324EC01D700451984 /* BottomBorderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CE56B224EC01D700451984 /* BottomBorderTextField.swift */; };
 		91CE56BF24EC11D300451984 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CE56BE24EC11D300451984 /* CategoriesViewController.swift */; };
 		91DC650B24F2BCF10000F266 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DC650A24F2BCF10000F266 /* UserController.swift */; };
+		91EF955124FBBD7300BA53EB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EF955024FBBD7300BA53EB /* User.swift */; };
+		91EF955324FBBF8600BA53EB /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EF955224FBBF8600BA53EB /* Category.swift */; };
+		91EF955524FBC05B00BA53EB /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EF955424FBC05B00BA53EB /* Note.swift */; };
 		91F8CCE824F1A279006F59BC /* CategoriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F8CCE724F1A279006F59BC /* CategoriesController.swift */; };
 		91FD35A224F2CE5B002C926A /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FD35A024F2CE5B002C926A /* UserManager.swift */; };
 /* End PBXBuildFile section */
@@ -103,6 +106,9 @@
 		91CE56B224EC01D700451984 /* BottomBorderTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomBorderTextField.swift; sourceTree = "<group>"; };
 		91CE56BE24EC11D300451984 /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		91DC650A24F2BCF10000F266 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
+		91EF955024FBBD7300BA53EB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		91EF955224FBBF8600BA53EB /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		91EF955424FBC05B00BA53EB /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		91F8CCE724F1A279006F59BC /* CategoriesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesController.swift; sourceTree = "<group>"; };
 		91FD35A024F2CE5B002C926A /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		F0263CB510EDB9676E4543B5 /* Pods_Notes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Notes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -245,6 +251,16 @@
 			path = cell;
 			sourceTree = "<group>";
 		};
+		91EF954F24FBBD5400BA53EB /* Realm Data */ = {
+			isa = PBXGroup;
+			children = (
+				91EF955024FBBD7300BA53EB /* User.swift */,
+				91EF955224FBBF8600BA53EB /* Category.swift */,
+				91EF955424FBC05B00BA53EB /* Note.swift */,
+			);
+			path = "Realm Data";
+			sourceTree = "<group>";
+		};
 		91F942A324F0181200DF7FF7 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +272,7 @@
 		91F942A424F0182500DF7FF7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				91EF954F24FBBD5400BA53EB /* Realm Data */,
 				91FD359E24F2CE5B002C926A /* UserDefults */,
 				91F8CCE724F1A279006F59BC /* CategoriesController.swift */,
 				91DC650A24F2BCF10000F266 /* UserController.swift */,
@@ -416,6 +433,7 @@
 				91CE56B324EC01D700451984 /* BottomBorderTextField.swift in Sources */,
 				91CE56AF24EBF2EF00451984 /* SignInViewController.swift in Sources */,
 				91CE566F24EBD59000451984 /* AppDelegate.swift in Sources */,
+				91EF955124FBBD7300BA53EB /* User.swift in Sources */,
 				91CE56B124EBF30D00451984 /* SignUpViewController.swift in Sources */,
 				912C53D124FA645500196F25 /* NotesController.swift in Sources */,
 				9100B4C324EED53A00223B67 /* NewNoteViewController.swift in Sources */,
@@ -428,6 +446,7 @@
 				91CE569B24EBDD6B00451984 /* TextFieldDesignable.swift in Sources */,
 				91FD35A224F2CE5B002C926A /* UserManager.swift in Sources */,
 				912D248E24ED9D6F009C0386 /* categoriesCellTableViewCell.swift in Sources */,
+				91EF955524FBC05B00BA53EB /* Note.swift in Sources */,
 				91700DDC24EC34FE008ED9E9 /* UILabelDesignable.swift in Sources */,
 				91DC650B24F2BCF10000F266 /* UserController.swift in Sources */,
 				917CC4A924F92B3000B37707 /* StaticTableViewController.swift in Sources */,
@@ -437,6 +456,7 @@
 				91700DDA24EC3206008ED9E9 /* UIViewCustomCornerRadius.swift in Sources */,
 				910FF11824EEE931007C639C /* SettingsViewController.swift in Sources */,
 				91F8CCE824F1A279006F59BC /* CategoriesController.swift in Sources */,
+				91EF955324FBBF8600BA53EB /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

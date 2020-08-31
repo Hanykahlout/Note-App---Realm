@@ -73,7 +73,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="gdb-Nc-ldd">
                                         <rect key="frame" x="21" y="32" width="321" height="116"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="61m-pS-clB" customClass="BottomBorderTextField" customModule="Notes" customModuleProvider="target">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-Mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="61m-pS-clB" customClass="BottomBorderTextField" customModule="Notes" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="321" height="43"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="43" id="Ako-vY-hBT"/>
@@ -214,8 +214,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="kR0-HD-Hmb"/>
                     <connections>
+                        <outlet property="emailTextField" destination="61m-pS-clB" id="3jX-A8-Ex1"/>
                         <outlet property="passwordTextField" destination="cju-br-PUe" id="zkg-Hc-iTJ"/>
-                        <outlet property="userNameTextField" destination="61m-pS-clB" id="3jX-A8-Ex1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -327,7 +327,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Bx-uP-QoK">
-                                                            <rect key="frame" x="317" y="19" width="32" height="32"/>
+                                                            <rect key="frame" x="333" y="24" width="16" height="22"/>
                                                             <state key="normal" image="delete-24px"/>
                                                             <connections>
                                                                 <action selector="deleteAction:" destination="xRH-kh-xRY" eventType="touchUpInside" id="rO4-pP-csc"/>
@@ -497,9 +497,8 @@
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="flipInRtl" value="YES"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
-                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kB1-4Z-xuh" customClass="ButtonDesignable" customModule="Notes" customModuleProvider="target">
-                                                            <rect key="frame" x="321" y="45" width="24" height="24"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kB1-4Z-xuh" customClass="ButtonDesignable" customModule="Notes" customModuleProvider="target">
+                                                            <rect key="frame" x="340" y="45.5" width="24" height="24"/>
                                                             <color key="backgroundColor" red="0.76862745098039209" green="0.76862745098039209" blue="0.76862745098039209" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" image="baseline_done_white_24pt"/>
@@ -555,8 +554,10 @@ dummy text ever since the 1500s,</string>
                                                         <constraint firstItem="z4U-hy-ZgQ" firstAttribute="leading" secondItem="r1B-Jn-iUm" secondAttribute="leading" id="XZO-uX-v8C"/>
                                                         <constraint firstItem="wMX-du-yfk" firstAttribute="centerY" secondItem="r1B-Jn-iUm" secondAttribute="centerY" id="XgC-Gb-CYJ"/>
                                                         <constraint firstAttribute="trailing" secondItem="3OK-OL-AXP" secondAttribute="trailing" id="gXm-cy-Sgb"/>
+                                                        <constraint firstItem="3OK-OL-AXP" firstAttribute="leading" secondItem="kB1-4Z-xuh" secondAttribute="trailing" constant="11" id="mWh-JN-Arc"/>
                                                         <constraint firstItem="z4U-hy-ZgQ" firstAttribute="top" secondItem="r1B-Jn-iUm" secondAttribute="top" id="pNS-3k-y2M"/>
                                                         <constraint firstAttribute="height" constant="115" id="x8o-Kj-SDi"/>
+                                                        <constraint firstItem="kB1-4Z-xuh" firstAttribute="centerY" secondItem="r1B-Jn-iUm" secondAttribute="centerY" id="zKR-BE-ILv"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -955,7 +956,7 @@ dummy text ever since the 1500s,</string>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j1f-fT-T3X">
-                                                    <rect key="frame" x="341" y="16" width="48" height="48"/>
+                                                    <rect key="frame" x="365" y="28" width="24" height="24"/>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" image="baseline_keyboard_arrow_right_black_24pt"/>
                                                 </button>
@@ -1060,7 +1061,7 @@ dummy text ever since the 1500s,</string>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ukm-qL-4hG">
-                                                    <rect key="frame" x="341" y="16" width="48" height="48"/>
+                                                    <rect key="frame" x="365" y="28" width="24" height="24"/>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" image="baseline_keyboard_arrow_right_black_24pt"/>
                                                 </button>
@@ -1165,7 +1166,7 @@ dummy text ever since the 1500s,</string>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0io-ub-1me">
-                                                    <rect key="frame" x="341" y="16" width="48" height="48"/>
+                                                    <rect key="frame" x="365" y="28" width="24" height="24"/>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" image="baseline_keyboard_arrow_right_black_24pt"/>
                                                 </button>
@@ -1270,7 +1271,7 @@ dummy text ever since the 1500s,</string>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ni-nI-zgX">
-                                                    <rect key="frame" x="341" y="16" width="48" height="48"/>
+                                                    <rect key="frame" x="365" y="28" width="24" height="24"/>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" image="baseline_keyboard_arrow_right_black_24pt"/>
                                                 </button>
