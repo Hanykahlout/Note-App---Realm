@@ -441,7 +441,7 @@
         <!--Categories Name-->
         <scene sceneID="WaW-ff-Y17">
             <objects>
-                <viewController storyboardIdentifier="CategoriesNoteViewController" id="LA0-tF-u4V" customClass="categoriesNoteViewController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CategoriesNoteViewController" id="LA0-tF-u4V" customClass="CategoriesNoteViewController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZVw-dp-wXb">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1824,7 +1824,7 @@ dummy text ever since the 1500s,</string>
         <!--New Note View Controller-->
         <scene sceneID="NtJ-Lk-mtY">
             <objects>
-                <viewController storyboardIdentifier="NewNoteViewController" id="XRq-1M-cC3" customClass="newNoteViewController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewNoteViewController" id="XRq-1M-cC3" customClass="NewNoteViewController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zbn-gl-buP">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

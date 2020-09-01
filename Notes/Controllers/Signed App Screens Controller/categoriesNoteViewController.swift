@@ -8,7 +8,7 @@
 
 import UIKit
 
-class categoriesNoteViewController: UIViewController {
+class CategoriesNoteViewController: UIViewController {
     
     @IBOutlet weak var categoriesNoteTableView: UITableView!
     var notes:[Note] = [Note]()
@@ -32,7 +32,7 @@ class categoriesNoteViewController: UIViewController {
     }
     
     @IBAction func addCategoriesNoteAction(_ sender: Any) {
-        let vc = storyboard?.instantiateViewController(identifier: "NewNoteViewController") as! newNoteViewController
+        let vc = storyboard?.instantiateViewController(identifier: "NewNoteViewController") as! NewNoteViewController
         vc.category = self.category
         vc.isSave = true
         navigationController?.pushViewController(vc, animated: true)
@@ -51,7 +51,7 @@ class categoriesNoteViewController: UIViewController {
     }
     
 }
-extension categoriesNoteViewController : UITableViewDataSource , UITableViewDelegate{
+extension CategoriesNoteViewController : UITableViewDataSource , UITableViewDelegate{
     
     func setDelegate() {
         categoriesNoteTableView.delegate = self
@@ -77,7 +77,7 @@ extension categoriesNoteViewController : UITableViewDataSource , UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = storyboard?.instantiateViewController(identifier: "NewNoteViewController") as! newNoteViewController
+        let vc = storyboard?.instantiateViewController(identifier: "NewNoteViewController") as! NewNoteViewController
         vc.isSave = false
         vc.note = notes[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)

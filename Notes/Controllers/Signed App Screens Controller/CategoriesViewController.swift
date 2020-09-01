@@ -80,7 +80,7 @@ extension CategoriesViewController : UITableViewDelegate , UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = storyboard?.instantiateViewController(identifier: "CategoriesNoteViewController") as! categoriesNoteViewController
+        let vc = storyboard?.instantiateViewController(identifier: "CategoriesNoteViewController") as! CategoriesNoteViewController
         vc.category = categories[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
